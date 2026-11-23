@@ -1,0 +1,578 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lrml:LegalRuleML xmlns:lrml="http://docs.oasis-open.org/legalruleml/ns/v1.0/" xmlns:ruleml="http://ruleml.org/spec">
+  <lrml:Comment>《中华人民共和国个人信息保护法》第21条及第57条的研究性规则序列化。URN谓词是本项目词汇。规范来源的段落位置使用正式法律网页加内部段落标识，未填入未经核对的国家标准条款码。权能记录21.3b和57.2b在配套原型中保留；此文件专门编码义务、禁止和明确许可。</lrml:Comment>
+  <lrml:LegalSources>
+    <lrml:LegalSource key="source-pipl-2021-08-20" sameAs="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" />
+  </lrml:LegalSources>
+  <lrml:LegalReferences>
+    <lrml:LegalReference refersTo="pipl-art21-par1" refID="第21条第1款" refIDSystemName="PIPL-2021-08-20 article and paragraph citation" refIDSystemSource="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" />
+    <lrml:LegalReference refersTo="pipl-art21-par2" refID="第21条第2款" refIDSystemName="PIPL-2021-08-20 article and paragraph citation" refIDSystemSource="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" />
+    <lrml:LegalReference refersTo="pipl-art21-par3" refID="第21条第3款" refIDSystemName="PIPL-2021-08-20 article and paragraph citation" refIDSystemSource="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" />
+    <lrml:LegalReference refersTo="pipl-art57-par1" refID="第57条第1款" refIDSystemName="PIPL-2021-08-20 article and paragraph citation" refIDSystemSource="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" />
+    <lrml:LegalReference refersTo="pipl-art57-par2" refID="第57条第2款" refIDSystemName="PIPL-2021-08-20 article and paragraph citation" refIDSystemSource="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" />
+  </lrml:LegalReferences>
+  <lrml:Associations>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#pipl-art21-par1" />
+      <lrml:appliesSource keyref="#source-pipl-2021-08-20" />
+      <lrml:toTarget keyref="#r-21-1a" />
+      <lrml:toTarget keyref="#r-21-1b" />
+    </lrml:Association>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#pipl-art21-par2" />
+      <lrml:appliesSource keyref="#source-pipl-2021-08-20" />
+      <lrml:toTarget keyref="#r-21-2a" />
+      <lrml:toTarget keyref="#r-21-2b" />
+      <lrml:toTarget keyref="#r-21-2c" />
+      <lrml:toTarget keyref="#r-21-2d" />
+    </lrml:Association>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#pipl-art21-par3" />
+      <lrml:appliesSource keyref="#source-pipl-2021-08-20" />
+      <lrml:toTarget keyref="#r-21-3a" />
+    </lrml:Association>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#pipl-art57-par1" />
+      <lrml:appliesSource keyref="#source-pipl-2021-08-20" />
+      <lrml:toTarget keyref="#r-57-1a" />
+      <lrml:toTarget keyref="#r-57-1b" />
+      <lrml:toTarget keyref="#r-57-1c" />
+      <lrml:toTarget keyref="#r-57-1d" />
+    </lrml:Association>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#pipl-art57-par2" />
+      <lrml:appliesSource keyref="#source-pipl-2021-08-20" />
+      <lrml:toTarget keyref="#r-57-2a" />
+      <lrml:toTarget keyref="#r-57-2c" />
+    </lrml:Association>
+  </lrml:Associations>
+  <lrml:Statements>
+    <lrml:PrescriptiveStatement key="r-21-1a">
+      <lrml:Comment>与受托人约定委托目的、期限、处理方式、信息种类、保护措施和双方的权利义务等。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-1a" closure="universal">
+        <ruleml:if>
+          <ruleml:Atom>
+            <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+            <ruleml:Var>Controller</ruleml:Var>
+            <ruleml:Var>Entrusted</ruleml:Var>
+            <ruleml:Var>Contract</ruleml:Var>
+          </ruleml:Atom>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:agree_on_required_entrustment_terms" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-21-1b">
+      <lrml:Comment>处理者监督受托人的处理活动。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-1b" closure="universal">
+        <ruleml:if>
+          <ruleml:Atom>
+            <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+            <ruleml:Var>Controller</ruleml:Var>
+            <ruleml:Var>Entrusted</ruleml:Var>
+            <ruleml:Var>Contract</ruleml:Var>
+          </ruleml:Atom>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:supervise_entrusted_processing" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-21-2a">
+      <lrml:Comment>受托人按照约定处理个人信息。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-2a" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrusted_activity" />
+              <ruleml:Var>Contract</ruleml:Var>
+              <ruleml:Var>Activity</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Entrusted</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:process_under_agreed_terms" />
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Activity</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-21-2b">
+      <lrml:Comment>受托人不得超出约定的处理目的、处理方式等进行处理。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-2b" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrusted_activity" />
+              <ruleml:Var>Contract</ruleml:Var>
+              <ruleml:Var>Activity</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Prohibition>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Entrusted</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:process_beyond_agreed_scope" />
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Activity</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Prohibition>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-21-2c">
+      <lrml:Comment>合同不生效、无效、被撤销或终止时，返还和删除是同一项义务的两种履行方式。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-2c" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrusted_data" />
+              <ruleml:Var>Contract</ruleml:Var>
+              <ruleml:Var>Data</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Or>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_not_in_force" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_invalid" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_revoked" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_terminated" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:Or>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Entrusted</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Or>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:return_personal_information" />
+                <ruleml:Var>Entrusted</ruleml:Var>
+                <ruleml:Var>Controller</ruleml:Var>
+                <ruleml:Var>Data</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:delete_personal_information" />
+                <ruleml:Var>Entrusted</ruleml:Var>
+                <ruleml:Var>Data</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:Or>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-21-2d">
+      <lrml:Comment>上述任一合同情形下，单独禁止保留。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-2d" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Contract</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:entrusted_data" />
+              <ruleml:Var>Contract</ruleml:Var>
+              <ruleml:Var>Data</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Or>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_not_in_force" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_invalid" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_revoked" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment_contract_terminated" />
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:Or>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Prohibition>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Entrusted</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:retain_personal_information" />
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>Data</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Prohibition>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-21-3a">
+      <lrml:Comment>未经个人信息处理者同意，受托人不得转委托。条件用显式否定区分已知未同意与信息未知。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-21-3a" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:And>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrustment" />
+                <ruleml:Var>Controller</ruleml:Var>
+                <ruleml:Var>Entrusted</ruleml:Var>
+                <ruleml:Var>Contract</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:entrusted_activity" />
+                <ruleml:Var>Contract</ruleml:Var>
+                <ruleml:Var>Activity</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:subdelegation_candidate" />
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>ThirdParty</ruleml:Var>
+              <ruleml:Var>Activity</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Neg>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:controller_consents_to_subdelegation" />
+                <ruleml:Var>Controller</ruleml:Var>
+                <ruleml:Var>Entrusted</ruleml:Var>
+                <ruleml:Var>ThirdParty</ruleml:Var>
+                <ruleml:Var>Activity</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:Neg>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Prohibition>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Entrusted</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:subdelegate_processing" />
+              <ruleml:Var>Entrusted</ruleml:Var>
+              <ruleml:Var>ThirdParty</ruleml:Var>
+              <ruleml:Var>Activity</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Prohibition>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1a">
+      <lrml:Comment>发生或可能发生个人信息泄露、篡改或丢失时，立即采取补救措施。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1a" closure="universal">
+        <ruleml:if>
+          <ruleml:Atom>
+            <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible" />
+            <ruleml:Var>Controller</ruleml:Var>
+            <ruleml:Var>Event</ruleml:Var>
+          </ruleml:Atom>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:take_immediate_remedial_measures" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1b">
+      <lrml:Comment>通知履职部门。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1b" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:competent_department" />
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_department" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1c">
+      <lrml:Comment>通知受影响个人。适用个人通知例外的规则优先关系。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1c" closure="universal">
+        <lrml:hasStrength>
+          <lrml:DefeasibleStrength />
+        </lrml:hasStrength>
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:affected_person" />
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_person" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1d">
+      <lrml:Comment>第57条下的通知应包括事件相关信息、减害措施和处理者联系方式。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1d" closure="universal">
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notification_under_article57" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Recipient</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+              <ruleml:Var>Notification</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:And>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:state_information_type_cause_and_possible_harm" />
+                <ruleml:Var>Notification</ruleml:Var>
+                <ruleml:Var>Event</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:state_controller_remedial_and_person_mitigation_measures" />
+                <ruleml:Var>Notification</ruleml:Var>
+                <ruleml:Var>Event</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:state_controller_contact_information" />
+                <ruleml:Var>Notification</ruleml:Var>
+                <ruleml:Var>Controller</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:And>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-2a">
+      <lrml:Comment>有效避免危害时，明确允许省略个人通知。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-2a" closure="universal">
+        <lrml:hasStrength>
+          <lrml:DefeasibleStrength />
+        </lrml:hasStrength>
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:affected_person" />
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:effective_harm_prevention" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Permission>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Neg>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_person" />
+                <ruleml:Var>Controller</ruleml:Var>
+                <ruleml:Var>Person</ruleml:Var>
+                <ruleml:Var>Event</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:Neg>
+          </lrml:Permission>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-2c">
+      <lrml:Comment>解释重构：对同一处理者、个人及事件，监管机关有效行使要求通知的权能后，发生通知义务。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-2c" closure="universal">
+        <lrml:hasStrength>
+          <lrml:DefeasibleStrength />
+        </lrml:hasStrength>
+        <ruleml:if>
+          <ruleml:And>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:affected_person" />
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:competent_department" />
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:valid_notice_order" />
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation>
+            <ruleml:slot>
+              <lrml:Bearer />
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_person" />
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:OverrideStatement>
+      <lrml:Comment>个人通知例外只优先于一般个人通知义务。</lrml:Comment>
+      <lrml:Override over="#r-57-2a" under="#r-57-1c" />
+    </lrml:OverrideStatement>
+    <lrml:OverrideStatement>
+      <lrml:Comment>同一主体、对象及事件的有效监管要求优先于省略个人通知的许可。</lrml:Comment>
+      <lrml:Override over="#r-57-2c" under="#r-57-2a" />
+    </lrml:OverrideStatement>
+  </lrml:Statements>
+</lrml:LegalRuleML>
