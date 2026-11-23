@@ -1,0 +1,19 @@
+record,scenario,facts,action,expected_active_or_must_stop,source_check,xml_check
+47.1a,ground_1_without_request,purpose_achieved|not_yet_deleted,,True,pass,pass
+47.1a,ground_2_without_request,service_ended|not_yet_deleted,,True,pass,pass
+47.1a,ground_3_without_request,consent_withdrawn|not_yet_deleted,,True,pass,pass
+47.1a,ground_4_without_request,breach_of_law|not_yet_deleted,,True,pass,pass
+47.1a,ground_5_without_request,other_statutory_ground|not_yet_deleted,,True,pass,pass
+47.1a,no_ground,not_yet_deleted,,False,pass,pass
+47.1a,request_alone,request|not_yet_deleted,,False,pass,pass
+47.1a,ground_with_request,consent_withdrawn|request|not_yet_deleted,,True,pass,pass
+47.1b,due_but_not_deleted,consent_withdrawn|not_yet_deleted,,True,pass,pass
+47.1b,due_and_already_deleted,consent_withdrawn,,False,pass,pass
+47.1b,no_ground_and_not_deleted,not_yet_deleted,,False,pass,pass
+47.2,restriction_1,consent_withdrawn|statutory_period_running,other_processing,True,pass,not exported (absence checked)
+47.2,restriction_2,consent_withdrawn|technical_difficulty,other_processing,True,pass,not exported (absence checked)
+47.2,restriction_3,consent_withdrawn|statutory_period_running|technical_difficulty,other_processing,True,pass,not exported (absence checked)
+47.2,restriction_4,consent_withdrawn,other_processing,False,pass,not exported (absence checked)
+47.2,restriction_5,consent_withdrawn|statutory_period_running,storage,False,pass,not exported (absence checked)
+47.2,restriction_6,consent_withdrawn|technical_difficulty,necessary_security,False,pass,not exported (absence checked)
+47.2,restriction_7,consent_withdrawn|statutory_period_running,nonessential_security,True,pass,not exported (absence checked)
