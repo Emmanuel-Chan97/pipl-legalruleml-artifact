@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8'?>
+<lrml:LegalRuleML xmlns:lrml="http://docs.oasis-open.org/legalruleml/ns/v1.0/" xmlns:ruleml="http://ruleml.org/spec">
+  <lrml:Comment>Worked source-link example, 2021 PIPL Article 57. The two AKN links and their associations belong to this example.</lrml:Comment>
+  <lrml:LegalSources>
+    <lrml:LegalSource key="official" sameAs="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"/>
+    <lrml:LegalSource key="akn-span-1" sameAs="art57.akn.xml#art_57__para_2__span_1"/>
+    <lrml:LegalSource key="akn-span-2" sameAs="art57.akn.xml#art_57__para_2__span_2"/>
+  </lrml:LegalSources>
+  <lrml:Associations>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#akn-span-1"/>
+      <lrml:toTarget keyref="#r-57-2a-modality"/>
+    </lrml:Association>
+    <lrml:Association>
+      <lrml:appliesSource keyref="#akn-span-2"/>
+      <lrml:toTarget keyref="#r-57-2c-modality"/>
+    </lrml:Association>
+  </lrml:Associations>
+  <lrml:Statements><lrml:PrescriptiveStatement key="r-57-1a">
+      <lrml:Comment>发生或可能发生个人信息泄露、篡改或丢失时，立即采取补救措施。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1a" closure="universal">
+        <ruleml:if>
+          <ruleml:Atom key=":r-57-1a-activation">
+            <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible"/>
+            <ruleml:Var>Controller</ruleml:Var>
+            <ruleml:Var>Event</ruleml:Var>
+          </ruleml:Atom>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation key="r-57-1a-modality">
+            <ruleml:slot>
+              <lrml:Bearer key="r-57-1a-participants"/>
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom key=":r-57-1a-content">
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:take_immediate_remedial_measures"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1b">
+      <lrml:Comment>通知履职部门。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1b" closure="universal">
+        <ruleml:if>
+          <ruleml:And key=":r-57-1b-activation">
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:competent_department"/>
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation key="r-57-1b-modality">
+            <ruleml:slot>
+              <lrml:Bearer key="r-57-1b-participants"/>
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom key=":r-57-1b-content">
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_department"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1c">
+      <lrml:Comment>通知受影响个人。适用个人通知例外的规则优先关系。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1c" closure="universal">
+        <lrml:hasStrength>
+          <lrml:DefeasibleStrength/>
+        </lrml:hasStrength>
+        <ruleml:if>
+          <ruleml:And key=":r-57-1c-activation">
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:affected_person"/>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation key="r-57-1c-modality">
+            <ruleml:slot>
+              <lrml:Bearer key="r-57-1c-participants"/>
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom key=":r-57-1c-content">
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_person"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-1d">
+      <lrml:Comment>第57条下的通知应包括事件相关信息、减害措施和处理者联系方式。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-1d" closure="universal">
+        <ruleml:if>
+          <ruleml:And key=":r-57-1d-activation">
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notification_under_article57"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Recipient</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+              <ruleml:Var>Notification</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation key="r-57-1d-modality">
+            <ruleml:slot>
+              <lrml:Bearer key="r-57-1d-participants"/>
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:And key=":r-57-1d-content">
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:state_information_type_cause_and_possible_harm"/>
+                <ruleml:Var>Notification</ruleml:Var>
+                <ruleml:Var>Event</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:state_controller_remedial_and_person_mitigation_measures"/>
+                <ruleml:Var>Notification</ruleml:Var>
+                <ruleml:Var>Event</ruleml:Var>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:state_controller_contact_information"/>
+                <ruleml:Var>Notification</ruleml:Var>
+                <ruleml:Var>Controller</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:And>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-2a">
+      <lrml:Comment>有效避免危害时，明确允许省略个人通知。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-2a" closure="universal">
+        <lrml:hasStrength>
+          <lrml:DefeasibleStrength/>
+        </lrml:hasStrength>
+        <ruleml:if>
+          <ruleml:And key=":r-57-2a-activation">
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:affected_person"/>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:effective_harm_prevention"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Permission key="r-57-2a-modality">
+            <ruleml:slot>
+              <lrml:Bearer key="r-57-2a-participants"/>
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Neg key=":r-57-2a-content">
+              <ruleml:Atom>
+                <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_person"/>
+                <ruleml:Var>Controller</ruleml:Var>
+                <ruleml:Var>Person</ruleml:Var>
+                <ruleml:Var>Event</ruleml:Var>
+              </ruleml:Atom>
+            </ruleml:Neg>
+          </lrml:Permission>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:PrescriptiveStatement key="r-57-2c">
+      <lrml:Comment>解释重构：对同一处理者、个人及事件，监管机关有效行使要求通知的权能后，发生通知义务。</lrml:Comment>
+      <ruleml:Rule key="urn:pipl-pilot:template:r-57-2c" closure="universal">
+        <lrml:hasStrength>
+          <lrml:DefeasibleStrength/>
+        </lrml:hasStrength>
+        <ruleml:if>
+          <ruleml:And key=":r-57-2c-activation">
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:incident_occurred_or_possible"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:affected_person"/>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:competent_department"/>
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+            <ruleml:Atom>
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:valid_notice_order"/>
+              <ruleml:Var>Department</ruleml:Var>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </ruleml:And>
+        </ruleml:if>
+        <ruleml:then>
+          <lrml:Obligation key="r-57-2c-modality">
+            <ruleml:slot>
+              <lrml:Bearer key="r-57-2c-participants"/>
+              <ruleml:Var>Controller</ruleml:Var>
+            </ruleml:slot>
+            <ruleml:Atom key=":r-57-2c-content">
+              <ruleml:Rel iri="urn:pipl-pilot:predicate:notify_person"/>
+              <ruleml:Var>Controller</ruleml:Var>
+              <ruleml:Var>Person</ruleml:Var>
+              <ruleml:Var>Event</ruleml:Var>
+            </ruleml:Atom>
+          </lrml:Obligation>
+        </ruleml:then>
+      </ruleml:Rule>
+    </lrml:PrescriptiveStatement>
+    <lrml:OverrideStatement>
+      <lrml:Comment>个人通知例外只优先于一般个人通知义务。</lrml:Comment>
+      <lrml:Override over="#r-57-2a" under="#r-57-1c"/>
+    </lrml:OverrideStatement>
+    <lrml:OverrideStatement>
+      <lrml:Comment>同一主体、对象及事件的有效监管要求优先于省略个人通知的许可。</lrml:Comment>
+      <lrml:Override over="#r-57-2c" under="#r-57-2a"/>
+    </lrml:OverrideStatement>
+    </lrml:Statements>
+</lrml:LegalRuleML>

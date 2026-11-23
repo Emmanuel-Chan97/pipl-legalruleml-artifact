@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">
+  <portion includedIn="#source">
+    <meta>
+      <identification source="#editors">
+        <FRBRWork>
+          <FRBRthis value="/akn/cn/act/2021-08-20/91"/>
+          <FRBRuri value="/akn/cn/act/2021-08-20/91"/>
+          <FRBRdate date="2021-08-20" name="adoption"/>
+          <FRBRauthor href="#npcsc"/>
+          <FRBRcountry value="cn"/>
+        </FRBRWork>
+        <FRBRExpression>
+          <FRBRthis value="/akn/cn/act/2021-08-20/91/zho@2021-08-20"/>
+          <FRBRuri value="/akn/cn/act/2021-08-20/91/zho@2021-08-20"/>
+          <FRBRdate date="2021-08-20" name="adoption"/>
+          <FRBRauthor href="#npcsc"/>
+          <FRBRlanguage language="zho"/>
+        </FRBRExpression>
+        <FRBRManifestation>
+          <FRBRthis value="/akn/cn/act/2021-08-20/91/zho@2021-08-20/~art_57.xml"/>
+          <FRBRuri value="/akn/cn/act/2021-08-20/91/zho@2021-08-20/main.xml"/>
+          <FRBRdate date="2026-11-21" name="encoding"/>
+          <FRBRauthor href="#editors"/>
+          <FRBRportion from="#art_57"/>
+          <FRBRformat value="application/xml"/>
+        </FRBRManifestation>
+      </identification>
+      <references source="#editors">
+        <TLCOrganization eId="npcsc" href="https://www.npc.gov.cn/" showAs="Standing Committee of the National People's Congress"/>
+        <TLCOrganization eId="editors" href="urn:pipl:research:encoders" showAs="Research encoding project"/>
+        <TLCReference name="sourceAct" eId="source" href="https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm" showAs="Personal Information Protection Law of the People's Republic of China, promulgated 20 August 2021"/>
+      </references>
+    </meta>
+    <portionBody>
+      <article eId="art_57">
+        <num>第五十七条</num>
+        <paragraph eId="art_57__para_1">
+          <intro>
+            <p>发生或者可能发生个人信息泄露、篡改、丢失的，个人信息处理者应当立即采取补救措施，并通知履行个人信息保护职责的部门和个人。通知应当包括下列事项：</p>
+          </intro>
+          <point eId="art_57__para_1__point_1">
+            <num>（一）</num>
+            <content>
+              <p>发生或者可能发生个人信息泄露、篡改、丢失的信息种类、原因和可能造成的危害；</p>
+            </content>
+          </point>
+          <point eId="art_57__para_1__point_2">
+            <num>（二）</num>
+            <content>
+              <p>个人信息处理者采取的补救措施和个人可以采取的减轻危害的措施；</p>
+            </content>
+          </point>
+          <point eId="art_57__para_1__point_3">
+            <num>（三）</num>
+            <content>
+              <p>个人信息处理者的联系方式。</p>
+            </content>
+          </point>
+        </paragraph>
+        <paragraph eId="art_57__para_2">
+          <content>
+            <p>个人信息处理者采取措施能够有效避免信息泄露、篡改、丢失造成危害的，个人信息处理者<span eId="art_57__para_2__span_1">可以不通知个人</span>；履行个人信息保护职责的部门认为可能造成危害的，<span eId="art_57__para_2__span_2">有权要求个人信息处理者通知个人</span>。</p>
+          </content>
+        </paragraph>
+      </article>
+    </portionBody>
+  </portion>
+</akomaNtoso>
