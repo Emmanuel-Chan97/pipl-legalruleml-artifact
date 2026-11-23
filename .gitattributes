@@ -1,0 +1,3 @@
+# Preserve the archived CSV and XML bytes for the replay comparisons.
+* -text
+*.zip binary
