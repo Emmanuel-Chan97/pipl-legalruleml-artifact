@@ -1,0 +1,9 @@
+id,change,compact_xsd,local_links,fixed_pilot,link_diagnostic,pilot_diagnostic
+C0,clean,pass,pass,pass,,
+M1,Art21 return-or-delete to return-and-delete,pass,pass,flag,,Art. 21(2): expected one Obligation of return OR delete
+M2,Art21 retention prohibition to duty,pass,pass,flag,,Art. 21(2): expected independent Prohibition on retention
+M3,Art57 waiver redirected to regulator notice,pass,pass,flag,,Art. 57(2): personal-notification waiver may override only the ordinary personal-notification obligation r-57-1c
+M4,Art57 permitted omission to obligatory omission,pass,pass,pass,,
+M5,Art57 order occurrence to authority harm assessment,pass,pass,pass,,
+C1,dangling waiver target,pass,flag,flag,nonexistent local reference #missing-local-statement at line 3499 | profile Override target #missing-local-statement is not a statement,Art. 57(2): personal-notification waiver may override only the ordinary personal-notification obligation r-57-1c
+C2,consistent local statement rename,pass,pass,flag,,Art. 57(2): personal-notification waiver may override only the ordinary personal-notification obligation r-57-1c

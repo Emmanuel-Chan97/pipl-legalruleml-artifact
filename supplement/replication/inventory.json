@@ -1,0 +1,41 @@
+{
+  "model_version": "4.0",
+  "articles": 74,
+  "records": 205,
+  "record_scopes": {
+    "structural_context": 25,
+    "core": 177,
+    "principle_context": 3
+  },
+  "record_tiers": {
+    "project_annotation": 83,
+    "structural_projection": 109,
+    "pilot_formalization": 13
+  },
+  "encoded_records": 122,
+  "articles_with_encoded_record": 57,
+  "competence_records": 20,
+  "project_arrays": {
+    "source_fragments": 137,
+    "legal_relations": 29,
+    "exceptions": 16,
+    "effect_templates": 28
+  },
+  "xml_nodes": {
+    "Obligation": 85,
+    "Prohibition": 14,
+    "Permission": 4,
+    "Right": 7,
+    "ConstitutiveStatement": 14,
+    "Override": 2,
+    "Association": 692
+  },
+  "native_statements": 124,
+  "xml_codepoint_references": 16,
+  "waiver_excerpt": {
+    "source": "source-a57",
+    "start": 214,
+    "end": 221,
+    "text": "可以不通知个人"
+  }
+}
