@@ -1,0 +1,62 @@
+{
+  "source": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+  "edition": "2021-08-20",
+  "predicate_namespace": "urn:pipl-pilot:predicate:",
+  "source_evidence": {
+    "end": [21, 131, 150, "委托合同不生效、无效、被撤销或者终止的"],
+    "choice": [21, 154, 176, "应当将个人信息返还个人信息处理者或者予以删除"],
+    "noRetention": [21, 177, 181, "不得保留"],
+    "incident": [57, 6, 27, "发生或者可能发生个人信息泄露、篡改、丢失的"],
+    "recipients": [57, 46, 65, "并通知履行个人信息保护职责的部门和个人"],
+    "mitigation": [57, 185, 206, "能够有效避免信息泄露、篡改、丢失造成危害的"],
+    "omitPersonal": [57, 214, 221, "可以不通知个人"],
+    "assessment": [57, 222, 244, "履行个人信息保护职责的部门认为可能造成危害的"],
+    "power": [57, 245, 260, "有权要求个人信息处理者通知个人"]
+  },
+  "guards": {
+    "endingEntrustment": ["And", "entrustment c t k", "entrusted_data k x",
+      ["Or", "entrustment_contract_not_in_force k", "entrustment_contract_invalid k", "entrustment_contract_revoked k", "entrustment_contract_terminated k"]],
+    "ordinaryDepartment": ["And", "incident_occurred_or_possible c e", "competent_department d c e"],
+    "ordinaryPerson": ["And", "incident_occurred_or_possible c e", "affected_person p c e"],
+    "effectiveMitigation": ["And", "incident_occurred_or_possible c e", "affected_person p c e", "effective_harm_prevention c e"],
+    "orderExercised": ["And", "incident_occurred_or_possible c e", "affected_person p c e", "competent_department d c e", "valid_notice_order d c p e"]
+  },
+  "roles": {
+    "disposition": {
+      "citation": "第21条第2款", "find_effect": "return_personal_information",
+      "guard": "endingEntrustment", "modal": "Obligation", "bearer": "t",
+      "effect": ["Or", "return_personal_information t c x", "delete_personal_information t x"],
+      "evidence": ["end", "choice"], "reading": "One bearer may discharge the one duty in either named way."
+    },
+    "nonRetention": {
+      "citation": "第21条第2款", "find_effect": "retain_personal_information",
+      "guard": "endingEntrustment", "modal": "Prohibition", "bearer": "t",
+      "effect": "retain_personal_information t x",
+      "evidence": ["end", "noRetention"], "reading": "The prohibition on retention shares the qualifying contract circumstances."
+    },
+    "ordinaryDepartment": {
+      "citation": "第57条第1款", "find_effect": "notify_department",
+      "guard": "ordinaryDepartment", "modal": "Obligation", "bearer": "c", "effect": "notify_department c d e",
+      "evidence": ["incident", "recipients"], "reading": "The shared directive is distributed over the two addressee types."
+    },
+    "ordinaryPerson": {
+      "citation": "第57条第1款", "find_effect": "notify_person",
+      "guard": "ordinaryPerson", "modal": "Obligation", "bearer": "c", "effect": "notify_person c p e",
+      "evidence": ["incident", "recipients"], "reading": "The shared directive is distributed over the two addressee types."
+    },
+    "mitigationWaiver": {
+      "citation": "第57条第2款", "find_guard": "effective_harm_prevention", "find_effect": "notify_person",
+      "guard": "effectiveMitigation", "modal": "Permission", "bearer": "c", "effect": ["Neg", "notify_person c p e"],
+      "evidence": ["mitigation", "omitPersonal", "recipients"], "reading": "Permission to omit notice is explicit. Restriction of its priority target to the ordinary personal-notice duty is the project's reading of its scope."
+    },
+    "orderedNotice": {
+      "citation": "第57条第2款", "find_guard": "competent_department", "find_effect": "notify_person",
+      "guard": "orderExercised", "modal": "Obligation", "bearer": "c", "effect": "notify_person c p e",
+      "evidence": ["assessment", "power", "incident", "recipients"], "reading": "The text grants the department a power. A valid order directed to this processor concerning this person and incident, and its priority over the waiver, are the project's interpretive reconstruction. An assessment by itself does not satisfy the order predicate."
+    }
+  },
+  "outgoing_priority_targets": {
+    "mitigationWaiver": ["ordinaryPerson"],
+    "orderedNotice": ["mitigationWaiver"]
+  }
+}

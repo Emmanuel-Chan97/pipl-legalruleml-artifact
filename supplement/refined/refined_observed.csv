@@ -1,0 +1,15 @@
+id,change,compact_xsd,local_links,fixed_pilot,source_role_profile,refined_diagnostic
+C0,clean,pass,pass,pass,pass,
+M1,Art21 return-or-delete to return-and-delete,pass,pass,flag,flag,disposition: effect shape or shared variable differs
+M2,Art21 retention prohibition to duty,pass,pass,flag,flag,nonRetention: expected Prohibition
+M3,Art57 waiver redirected to regulator notice,pass,pass,flag,flag,mitigationWaiver: outgoing priorities must target exactly ordinaryPerson
+M4,Art57 permitted omission to obligatory omission,pass,pass,pass,flag,mitigationWaiver: expected Permission
+M5,Art57 order occurrence to authority harm assessment,pass,pass,pass,flag,orderedNotice: guard differs from orderExercised
+C1,dangling waiver target,pass,flag,flag,flag,mitigationWaiver: outgoing priorities must target exactly ordinaryPerson
+C2,consistent local statement rename,pass,pass,flag,pass,
+C3,reverse the two disjuncts in the return/delete duty,pass,pass,pass,pass,
+C4,consistently rename every statement key and reverse the disjunction,pass,pass,flag,pass,
+C5,alpha-rename all variables in the ordered notice rule,pass,pass,pass,pass,
+C6,regroup the positive conjunction in the ordered notice guard,pass,pass,pass,flag,orderedNotice: guard differs from orderExercised
+B1,unprofiled remedy obligation changed to permission,pass,pass,pass,pass,
+B2,bind order to a different person from the notice recipient,pass,pass,pass,flag,orderedNotice: guard differs from orderExercised
