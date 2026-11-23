@@ -1,0 +1,52 @@
+{
+  "before": {
+    "id": "E57-PERSON-WAIVER",
+    "label": "有效避害时的个人通知豁免",
+    "target_ids": [
+      "57.1c"
+    ],
+    "condition": {
+      "op": "predicate",
+      "text": "处理者采取措施能够有效避免相应泄露、篡改、丢失造成危害"
+    },
+    "effect": "仅允许省略对个人的通知；不修改57.1b的部门通知和57.1a的补救要求。",
+    "source_refs": [
+      "a57"
+    ],
+    "resolution": "stated",
+    "record_refs": [
+      "57.1c",
+      "57.2a"
+    ],
+    "target_scope": "同一处理者、同一安全事件、同一受影响个人的普通个人通知要求",
+    "permission_record_id": "57.2a",
+    "source_fragment_ids": [
+      "fragment-57-2e0ec767fe"
+    ]
+  },
+  "after": {
+    "id": "E57-PERSON-WAIVER",
+    "label": "有效避害时的个人通知豁免",
+    "target_ids": [
+      "57.1b"
+    ],
+    "condition": {
+      "op": "predicate",
+      "text": "处理者采取措施能够有效避免相应泄露、篡改、丢失造成危害"
+    },
+    "effect": "仅允许省略对个人的通知；不修改57.1b的部门通知和57.1a的补救要求。",
+    "source_refs": [
+      "a57"
+    ],
+    "resolution": "stated",
+    "record_refs": [
+      "57.1c",
+      "57.2a"
+    ],
+    "target_scope": "同一处理者、同一安全事件、同一受影响个人的普通个人通知要求",
+    "permission_record_id": "57.2a",
+    "source_fragment_ids": [
+      "fragment-57-2e0ec767fe"
+    ]
+  }
+}
