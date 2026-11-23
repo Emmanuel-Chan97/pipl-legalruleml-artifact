@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人信息保护法 · 规范标注阅读器</title>
+<style>
+:root {color-scheme:light;--ink:#172d32;--teal:#12645e;--line:#ced9d4;--paper:#fcfcf9}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 "Source Sans 3","PingFang SC","Microsoft YaHei",sans-serif}
+main{width:min(100% - 2.4rem,54rem);margin:2.6rem auto 5rem}h1,h2,h3,blockquote,p{margin:0}h1,h2{font-family:"Source Serif 4","Songti SC","SimSun",serif}h1{font-size:clamp(1.75rem,4vw,2.5rem)}h2{font-size:1.65rem}h3{font-size:1.04rem}header{padding-bottom:1.4rem;border-bottom:2px solid var(--teal)}.tools,.look{display:flex;align-items:center;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+.fileLabel,input,select{font:inherit}input[type=file]{max-width:100%;font-size:.85rem}.status,.muted{color:#536861;font-size:.9rem}label{font-weight:600}input[type=search],select{padding:.35rem .55rem;border:1px solid #a1b2aa;background:white;border-radius:.2rem;color:var(--ink);min-width:0}select{max-width:100%}#query{width:13rem}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}#record{margin-top:2rem}.citation{font-weight:600;font-size:.9rem;color:var(--teal)}.quote{border-left:3px solid #b6c8be;background:#eef3ed;margin-top:1rem;padding:.75rem 1rem;white-space:pre-line}.question{padding:1.1rem 0;border-bottom:1px solid var(--line)}.answer{margin:.25rem 0;white-space:pre-line}.source{margin:.4rem 0 0;padding-left:1.6rem;overflow-wrap:anywhere}.source li{margin:.45rem 0}summary{color:var(--teal);cursor:pointer;width:fit-content}details>p,details>ul{margin-top:.4rem}code{font-size:.86em}.look[hidden],article[hidden]{display:none}
+
+.facets{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin:1rem 0;gap:.85rem 1.1rem;padding:.65rem 0;border-block:1px solid var(--line)}.facets dt{font-size:.82rem;color:#536861}.facets dd{margin:0;overflow-wrap:anywhere}.facetStatus{display:block;color:#536861;font-size:.85rem}
+</style>
+<main>
+<header>
+<h1>个人信息保护法 · 规范标注</h1>
+<div class="tools"><label for="file">打开模型文件</label><input type="file" id="file" accept=".json,application/json"></div>
+<p id="status" class="status" role="status">请选择同包的 PIPL-model.json。</p>
+<div id="controls" class="look" hidden>
+<label for="query">查找</label><input id="query" type="search" placeholder="条号、记录 ID 或题名">
+<label for="select">规范记录</label><select id="select"></select>
+</div>
+</header>
+<article id="record" aria-live="polite"></article>
+</main>
+<script>
+'use strict';
+const byId = id => document.getElementById(id);
+const slots = {who_is_involved:'participants',what_action:'content_expr',what_force:'conduct_force',
+  does_conduct_force_apply:'conduct_force',what_triggers_it:'activation',what_exceptions:'exceptions',
+  when:'temporal',what_scope:'applicability',what_effects:'effects'};
+const operators = {'lrml:Obligation':'义务','lrml:Permission':'许可','lrml:Prohibition':'禁止'};
+const terms = {not_separately_annotated:'尚未单独标注',not_applicable:'不适用',field_excerpt:'字段专属引文',
+  record_level:'整条记录',mixed_resolution:'角色判断依据不一'};
+const uses = {basis:'判断依据',context:'上下文',cross_reference:'跨条文参照',interpretive_basis:'解释依据',
+  field_excerpt:'字段专属引文',effect_target:'效果目标',related_rule:'关联规范'};
+const logics = {all:'所有下列事项',any:'任一下列事项',not:'否定',catalog:'列举'};
+let model, records, sources, fragments, requestId=0;
+
+function el(tag, text, style) {
+  const item=document.createElement(tag);
+  if(text!==undefined) item.textContent=text;
+  if(style) item.className=style;
+  return item;
+}
+function index(list) { return new Map(list.map(row=>[row.id,row])); }
+function tr(value) { return terms[value] || model.answer_terms[value] || value; }
+function expr(value) {
+  if(!value) return '';
+  if(Array.isArray(value.args)) return (logics[value.op]||value.op)+'（'+value.args.map(expr).join('；')+'）';
+  if(value.text) return value.text;
+  if(value.predicate) {
+    let text=[value.predicate,value.object].filter(Boolean).join(' ');
+    if(value.actor) text+='〔行为者：'+value.actor+'〕';
+    if(value.recipient) text+='〔受领者：'+value.recipient+'〕';
+    return text;
+  }
+  return JSON.stringify(value);
+}
+function displayCategory(data, record) {
+  const tables=data.display_categories;
+  if(!tables)return record.category||'待归类';
+  if(Object.hasOwn(tables.by_record,record.id))return tables.by_record[record.id];
+  if(record.rule_function==='conduct_requirement')
+    return tables.by_conduct_element[record.legalruleml.native_element]||'待归类';
+  return tables.by_function[record.rule_function]||'待归类';
+}
+function recordFacets(r) {
+  const list=el('dl',undefined,'facets');
+  function add(label,value,status) {
+    const group=el('div');
+    const description=el('dd',value);
+    if(status)description.append(el('small',status,'facetStatus'));
+    group.append(el('dt',label),description);
+    list.append(group);
+  }
+  const mapping=r.legalruleml;
+  const exportStatus={encoded:'已写入交换 XML',retained:'仅保存在项目模型中'}[mapping.status]||'导出状态待确认';
+  add('法律功能',model.function_labels?.[r.rule_function]||r.rule_function);
+  add('LegalRuleML 原生元素',mapping.native_element||'未指定原生元素',exportStatus);
+  add('中文展示分类',displayCategory(model,r));
+  return list;
+}
+function targetNames(ids) {
+  return ids.map(id=>id+(records.has(id)?' '+records.get(id).manifestation:'')).join('、');
+}
+function ruleText(row) {
+  const lines=[row.label];
+  if(row.condition) lines.push('条件　'+expr(row.condition));
+  if(row.effect) lines.push('效果　'+row.effect);
+  if(row.target_ids?.length) lines.push('目标规范　'+targetNames(row.target_ids));
+  if(row.note) lines.push(row.note);
+  return lines.filter(Boolean).join('\n');
+}
+function answerText(field,r,annotation) {
+  switch(field) {
+    case 'participants':return r.participants.map(p=>(model.role_labels[p.role]||p.role)+'　'+p.label).join('\n');
+    case 'content_expr':return expr(r.content_expr);
+    case 'conduct_force': {
+      const tag=r.legalruleml.native_element;
+      if(Object.hasOwn(operators,tag)) return operators[tag]+'（'+tag+'）';
+      return [model.function_labels?.[r.rule_function]||r.rule_function,tag?('另有原生构造 '+tag):''].filter(Boolean).join(' · ');
+    }
+    case 'activation':return expr(r.activation);
+    case 'exceptions': {
+      const result=model.exceptions.filter(item=>item.record_refs.includes(r.id)).map(ruleText);
+      if(Object.hasOwn(annotation,'target_record_ids_override')){
+        const override=annotation.target_record_ids_override;
+        result.push('标注所指目标　'+(override===null?'未记录':override.length?targetNames(override):'空列表'));
+      }
+      return result.join('\n\n');
+    }
+    case 'temporal':return r.temporal.map(t=>[t.text,t.applies_to&&'修饰　'+t.applies_to,t.anchor&&'起点或条件　'+t.anchor].filter(Boolean).join('\n')).join('\n\n');
+    case 'applicability':return r.applicability?.text;
+    case 'effects':return r.effects.map(ruleText).join('\n\n');
+  }
+}
+function sourceItem(id) {
+  const a=model.source_anchor_catalog[id];
+  if(!a)return el('li','未解析的锚点 '+id);
+  const item=el('li');
+  item.append(el('p',[uses[a.relation]||a.relation,a.citation,a.document_version].filter(Boolean).join(' · '),'muted'));
+  let excerpt='';
+  if(a.kind==='span'){
+    const text=sources.get(a.source_id)?.text;
+    if(text!==undefined) excerpt=Array.from(text).slice(a.start,a.end).join('');
+  } else if(a.kind==='fragment')excerpt=fragments.get(a.fragment_id)?.quote||'';
+  if(excerpt)item.append(el('p',excerpt));
+  return item;
+}
+function render() {
+  const root=byId('record');root.replaceChildren();
+  const r=records.get(byId('select').value);
+  if(!r){root.append(el('p','未找到匹配的规范记录。','muted'));return;}
+  root.append(el('p',r.citation+' · '+r.id,'citation'),el('h2',r.manifestation),el('p',r.content),recordFacets(r));
+  const quote=fragments.get(r.source_fragment_id)?.quote;
+  if(quote)root.append(el('blockquote',quote,'quote'));
+  const hasOperator=Object.hasOwn(operators,r.legalruleml.native_element);
+  for(const [key,q] of Object.entries(model.question_catalog)){
+    if((key==='what_force'&&!hasOperator)||(key==='does_conduct_force_apply'&&hasOperator))continue;
+    const field=q.annotation_slot||slots[key], a=r.field_annotations[field];
+    if(!a)continue;
+    const section=el('section',undefined,'question');
+    section.append(el('h3',q.prompt));
+    const value=answerText(field,r,a);
+    if(value)section.append(el('p',value,'answer'));
+    const labels=[a.basis,a.answer_state,a.coverage].filter((x,i,all)=>x&&all.indexOf(x)===i).map(tr);
+    if(labels.length)section.append(el('p',labels.join(' · '),'muted'));
+    const note=a.note??(field==='conduct_force'?r.linguistic_form.scope_note:'');
+    const refs=a.anchor_refs||[];
+    if(note||refs.length){
+      const details=el('details'); details.append(el('summary','说明与出处'+(refs.length?'（'+refs.length+'）':'')));
+      if(note)details.append(el('p',note));
+      if(refs.length){const list=el('ul',undefined,'source');for(const ref of refs)list.append(sourceItem(ref));details.append(list);}
+      section.append(details);
+    }
+    root.append(section);
+  }
+}
+function filterRecords(preferred) {
+  const q=byId('query').value.trim().toLowerCase();
+  const numeric=/^(?:第)?([0-9]+)(?:条)?$/.exec(q);
+  const select=byId('select');select.replaceChildren();
+  for(const r of model.records){
+    const hit=numeric ? fragments.get(r.source_fragment_id)?.article===Number(numeric[1]) :
+      [r.id,r.citation,r.manifestation].some(text=>String(text).toLowerCase().includes(q));
+    if(!q||hit){const opt=el('option',r.id+'　'+r.manifestation);opt.value=r.id;select.append(opt);}
+  }
+  if(Array.from(select.options).some(opt=>opt.value===preferred))select.value=preferred;
+  render();
+}
+function install(data) {
+  if(!Array.isArray(data.records)||!data.records.length||!data.records.every(r=>r.field_annotations)||
+     !data.source_anchor_catalog||!data.question_catalog)throw Error('请选择随包提供的 PIPL-model.json。');
+  model=data;records=index(data.records);sources=index(data.sources);fragments=index(data.source_fragments);
+  byId('query').value='';byId('controls').hidden=false;byId('status').textContent='已载入 '+records.size+' 条规范记录。';
+  filterRecords(records.has('57.2a')?'57.2a':data.records[0].id);
+}
+byId('query').addEventListener('input',()=>filterRecords(byId('select').value));
+byId('select').addEventListener('change',render);
+byId('file').addEventListener('change',async event=>{
+  const file=event.target.files[0];if(!file)return;
+  const ticket=++requestId;
+  try{const data=JSON.parse(await file.text());if(ticket===requestId)install(data);}
+  catch(err){if(ticket===requestId)byId('status').textContent='读取失败。'+err.message;}
+});
+if(['http:','https:'].includes(location.protocol)){
+  const ticket=++requestId;
+  fetch('./PIPL-model.json').then(res=>{if(!res.ok)throw Error();return res.json();})
+    .then(data=>{if(ticket===requestId)install(data);}).catch(()=>{});
+}
+</script>
+</html>
